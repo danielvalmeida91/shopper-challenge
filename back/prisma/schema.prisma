@@ -14,9 +14,38 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
+  Rating        Rating[]
 
   @@map("users")
+}
+
+model Driver {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  car         String
+  ratePerKm   Float
+  minKm       Int
+  Rating      Rating[]
+
+  @@map("drivers")
+}
+
+model Rating {
+  id          Int    @id @default(autoincrement())
+  score       Int
+  description String
+
+  driver    Driver @relation(fields: [driver_id], references: [id])
+  driver_id Int
+
+  user    User @relation(fields: [user_id], references: [id])
+  user_id Int
+
+  @@map("ratings")
 }
