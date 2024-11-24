@@ -1,15 +1,10 @@
 import { PrismaClient } from "@prisma/client"
 import fastify from "fastify"
+import { create } from "./controller/user-controller"
 
 export const app = fastify()
 
-const prisma = new PrismaClient()
-
-function teste() {
-  return "teste"
-}
-
-teste()
+export const prisma = new PrismaClient()
 
 prisma.user.create({
   data:{
@@ -21,3 +16,5 @@ prisma.user.create({
 app.get("/", (req, res) => {
   res.send({ message: "Hello World"})
 })
+
+app.post("/user", create)
