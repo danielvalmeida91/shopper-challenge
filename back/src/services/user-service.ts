@@ -1,4 +1,4 @@
-import { Erros, CustomErrors } from '@/errors'
+import { CustomErrors, Errors } from '@/errors'
 import { prisma } from '@/lib/prisma'
 import { UserRepository } from '@/repositories/user-repository'
 import { hash } from 'bcrypt'
@@ -19,7 +19,7 @@ export async function register({ name, email, password }: ICreateUser) {
   })
 
   if (userWithSameEmail) {
-    throw new CustomErrors(Erros.USER_ALREADY_EXISTS)
+    throw new CustomErrors(Errors.USER_ALREADY_EXISTS)
   }
 
   const userRepository = new UserRepository()
