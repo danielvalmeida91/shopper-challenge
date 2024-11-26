@@ -24,8 +24,8 @@ model Driver {
   name        String
   description String
   car         String
-  ratePerKm   Float
-  minKm       Int
+  rate_per_km Float
+  min_km      Int
   Rating      Rating[]
   Ride        Ride[]
 

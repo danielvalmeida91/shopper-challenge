@@ -35,7 +35,7 @@ export async function getDriversByDistance({ distance }: ICalculateRide) {
       rating: driver.Rating[0].score ?? '',
       comment: driver.Rating[0].description ?? ''
     },
-    value: driver.ratePerKm * Number(distance)
+    value: driver.rate_per_km * Number(distance)
   }))
   
   driversWithCost.sort((a, b) => a.value - b.value)
