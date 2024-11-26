@@ -4,18 +4,19 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://docker:docker@localhost:5432/mydb?schema=shopper-challenge"
 }
 
-model User {
+model Customer {
   id            Int      @id @default(autoincrement())
   name          String
   email         String   @unique
   password_hash String
   created_at    DateTime @default(now())
   Rating        Rating[]
+  Ride          Ride[]
 
-  @@map("users")
+  @@map("customers")
 }
 
 model Driver {
@@ -26,6 +27,7 @@ model Driver {
   ratePerKm   Float
   minKm       Int
   Rating      Rating[]
+  Ride        Ride[]
 
   @@map("drivers")
 }
@@ -38,8 +40,26 @@ model Rating {
   driver    Driver @relation(fields: [driver_id], references: [id], onDelete: Cascade)
   driver_id Int
 
-  user    User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id Int
+  customer    Customer @relation(fields: [customer_id], references: [id])
+  customer_id Int
 
   @@map("ratings")
+}
+
+model Ride {
+  id          Int      @id @default(autoincrement())
+  date        DateTime @default(now())
+  origin      String
+  destination String
+  distance    Int
+  duration    String
+  value       Int
+
+  customer    Customer @relation(fields: [customer_id], references: [id])
+  customer_id Int
+
+  driver    Driver @relation(fields: [driver_id], references: [id])
+  driver_id Int
+
+  @@map("rides")
 }

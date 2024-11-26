@@ -4,7 +4,8 @@ import { z } from 'zod'
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
   PORT: z.coerce.number().default(8080),
-  GOOGLE_API_KEY: z.string()
+  DATABASE_URL: z.string().default('postgresql://docker:docker@localhost:5432/mydb?schema=shopper-challenge'),
+  GOOGLE_API_KEY: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

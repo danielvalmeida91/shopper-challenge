@@ -5,7 +5,7 @@ interface ICalculateRide {
   distance: string | number
 }
 
-export async function calculateRide({ distance }: ICalculateRide) {
+export async function getDriversByDistance({ distance }: ICalculateRide) {
   if(!distance){
     throw new CustomErrors(Errors.DISTANCE_NOT_FOUND)
   }

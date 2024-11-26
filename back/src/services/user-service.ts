@@ -12,14 +12,14 @@ interface ICreateUser {
 export async function register({ name, email, password }: ICreateUser) {
   const password_hash = await hash(password, 6)
 
-  const userWithSameEmail = await prisma.user.findUnique({
+  const userWithSameEmail = await prisma.customer.findUnique({
     where: {
       email
     }
   })
 
   if (userWithSameEmail) {
-    throw new CustomErrors(Errors.USER_ALREADY_EXISTS)
+    throw new CustomErrors(Errors.CUSTOMER_ALREADY_EXISTS)
   }
 
   const userRepository = new UserRepository()

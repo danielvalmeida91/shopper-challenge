@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 
 export function findByEmail(email: string) {
-  return prisma.user.findUnique({
+  return prisma.customer.findUnique({
     where: {
       email
     }
@@ -12,15 +12,15 @@ export function findByEmail(email: string) {
 
 export class UserRepository {
   findByEmail(email: string) {
-    return prisma.user.findUnique({
+    return prisma.customer.findUnique({
       where: {
         email
       }
     })
   }
-  create(user: Prisma.UserCreateInput) {
-    return prisma.user.create({
-      data: user
+  create(customer: Prisma.CustomerCreateInput) {
+    return prisma.customer.create({
+      data: customer
     })
   }
 }

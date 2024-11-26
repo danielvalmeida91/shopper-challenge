@@ -4,7 +4,13 @@ import { hash } from 'bcrypt'
 const prisma = new PrismaClient()
 
 async function seed(){
-  await prisma.user.create({
+  const hasCustomer = await prisma.customer.findMany()
+
+  if(hasCustomer.length) {
+    return 
+  }
+  
+  await prisma.customer.create({
     data: {
       id: 1,
       name: 'John',
@@ -13,7 +19,7 @@ async function seed(){
     }
   })
   
-  await prisma.user.create({
+  await prisma.customer.create({
     data: {
       id: 2,
       name: 'Marie',
@@ -57,7 +63,7 @@ async function seed(){
 
   await prisma.rating.create({
     data: {
-      user_id: 1,
+      customer_id: 1,
       driver_id: 1,
       description: 'Motorista simpático, mas errou o caminho 3 vezes. O carro cheira a donuts.',
       score: 2
@@ -66,7 +72,7 @@ async function seed(){
     
   await prisma.rating.create({
     data: {
-      user_id: 1,
+      customer_id: 1,
       driver_id: 2,
       description: 'Que viagem incrível! O carro é um show à parte e o motorista, apesar de ter uma cara de poucos amigos, foi super gente boa. Recomendo!',
       score: 4
@@ -75,7 +81,7 @@ async function seed(){
 
   await prisma.rating.create({
     data: {
-      user_id: 1,
+      customer_id: 1,
       driver_id: 3,
       description: 'Serviço impecável! O motorista é a própria definição de classe e o carro é simplesmente magnífico. Uma experiência digna de um agente secreto.',
       score: 5

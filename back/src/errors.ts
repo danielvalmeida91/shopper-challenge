@@ -5,20 +5,10 @@ export type ErrorPayload = {
 }
 
 export const Errors: Record<string, ErrorPayload> = {
-  USER_ALREADY_EXISTS: {
-    message: 'E-mail already exists.',
-    code: 'USER_ALREADY_EXISTS',
+  CUSTOMER_ALREADY_EXISTS: {
+    message: 'E-mail não disponível para cadastro.',
+    code: 'CUSTOMER_ALREADY_EXISTS',
     statusCode: 409
-  },
-  ORIGIN_AND_DESTINATION_ARE_THE_SAME: {
-    message: 'Origin and destination cannot be the same.',
-    code: 'ORIGIN_AND_DESTINATION_ARE_THE_SAME',
-    statusCode: 400
-  },
-  USER_NOT_FOUND: {
-    message: 'User not found.',
-    code: 'USER_NOT_FOUND',
-    statusCode: 404
   },
   ADRESS_NOT_FOUND: {
     message: 'Address not found.',
@@ -44,7 +34,17 @@ export const Errors: Record<string, ErrorPayload> = {
     message: 'Quilometragem inválida para o motorista',
     code: 'INVALID_DISTANCE',
     statusCode: 406
-  }
+  },
+  INVALID_DRIVER: {
+    message: 'Motorista inválido',
+    code: 'INVALID_DRIVER',
+    statusCode: 400
+  },
+  NO_RIDES_FOUND: {
+    message: 'Nenhum registro encontrado',
+    code: 'NO_RIDES_FOUND',
+    statusCode: 404
+  },
 }
 
 
