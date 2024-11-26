@@ -40,8 +40,6 @@ export async function getGeocodeByLatitudeAndLongitude(request: FastifyRequest, 
       return reply.status(error.getError().statusCode).send(error.getError())
     }
 
-    console.log(error)
-
     throw error
   }
 }
@@ -62,8 +60,6 @@ export async function getDistanceBetweenTwoPoints(request: FastifyRequest, reply
     if (error instanceof CustomErrors) {
       return reply.status(error.getError().statusCode).send(error.getError())
     }
-
-    console.log(error)
 
     throw error
   }

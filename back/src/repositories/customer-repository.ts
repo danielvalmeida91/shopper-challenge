@@ -10,7 +10,7 @@ export function findByEmail(email: string) {
 }
 
 
-export class UserRepository {
+export class CustomerRepository {
   findByEmail(email: string) {
     return prisma.customer.findUnique({
       where: {

@@ -1,5 +1,5 @@
 import { CustomErrors } from '@/errors'
-import { register } from '@/services/user-service'
+import { register } from '@/services/customer-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
