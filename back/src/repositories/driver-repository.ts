@@ -10,6 +10,9 @@ export function findDriverById(id: number) {
 }
 
 export class DriverRepository {
+  findAll(){
+    return prisma.driver.findMany()
+  }
   findById(id: number) {
     return prisma.driver.findFirst({
       where: {

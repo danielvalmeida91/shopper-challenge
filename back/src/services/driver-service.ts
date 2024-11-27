@@ -24,9 +24,9 @@ export async function getDriversByDistance({ distance }: ICalculateRide) {
     }
   })
 
-  if(!getDrivers.length){
-    throw new CustomErrors(Errors.DRIVER_NOT_FOUND)
-  }
+  // if(!getDrivers.length){
+  //   throw new CustomErrors(Errors.DRIVER_NOT_FOUND)
+  // }
   
   const driversWithCost = getDrivers.map(driver => {
     const hasRating = driver.Rating.length > 0
@@ -49,6 +49,16 @@ export async function getDriversByDistance({ distance }: ICalculateRide) {
   
   return driversWithCost
 }
+
+
+export async function getAll() {
+
+  const driverRepository = new DriverRepository()
+  const drivers = await driverRepository.findAll()
+
+  return drivers
+}
+
 
 export async function register({ car, description, minKm, name, ratePerKm }: z.infer<typeof registerBodySchema>) {
 

@@ -31,7 +31,7 @@ export async function estimateValue({ customer_id, origin, destination }: z.infe
       longitude: geocodeDestination.longitude
     },
     distance,
-    duration: routeResponse.rows[0].elements[0].duration.value,
+    duration: routeResponse.rows[0].elements[0].duration.text,
     options: allowedDrivers,
     customer_id,
     routeResponse

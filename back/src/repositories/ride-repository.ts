@@ -5,9 +5,12 @@ export class RideRepository {
   history(customer_id: number, driver_id?: number) {
     return prisma.ride.findMany({
       where: {
-        customer_id,
+        customer_id: customer_id,
         driver_id : driver_id ? driver_id : undefined
       },
+      include:{
+        driver: true
+      }
 
     })
   }

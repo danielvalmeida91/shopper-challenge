@@ -1,5 +1,14 @@
-import 'dotenv/config'
+import { fileURLToPath } from 'url'
+import path from 'path'
+import { config } from 'dotenv'
 import { z } from 'zod'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+config({
+  path: path.resolve(__dirname, '../../../.env')
+})
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
@@ -17,3 +26,4 @@ if (_env.success === false) {
 }
 
 export const env = _env.data
+

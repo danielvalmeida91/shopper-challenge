@@ -1,5 +1,5 @@
 import { CustomErrors } from '@/errors'
-import { register } from '@/services/driver-service'
+import { getAll, register } from '@/services/driver-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -16,6 +16,22 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   try {
     const driver = await register({ name, car, description, minKm, ratePerKm })
+
+    return reply.status(201).send(driver)
+  } catch (error) {
+    if (error instanceof CustomErrors) {
+      return reply.status(error.getError().statusCode).send(error.getError())
+    }
+
+    throw error
+  }
+}
+
+
+export async function list(request: FastifyRequest, reply: FastifyReply) {
+
+  try {
+    const driver = await getAll()
 
     return reply.status(201).send(driver)
   } catch (error) {
