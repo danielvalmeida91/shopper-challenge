@@ -1,5 +1,4 @@
 import { env } from '@/env'
-import { CustomErrors, Errors } from '@/errors'
 import axios from 'axios'
 
 const BASE_URL = 'https://maps.googleapis.com/maps/api'
@@ -12,16 +11,16 @@ export const googleMapsService = {
         key: env.GOOGLE_API_KEY
       },
     })
-
+  
     const { results } = response.data
-
-    if(!results.length) {
-      throw new CustomErrors(Errors.ADDRESS_NOT_FOUND)
+  
+    if (!results || results.length === 0) {
+      throw new Error('ADDRESS_NOT_FOUND')
     }
-
+  
     const fullAddress = results[0].formatted_address
     const location = results[0].geometry.location
-
+  
     return {
       address: fullAddress,
       latitude: location.lat,
@@ -36,6 +35,7 @@ export const googleMapsService = {
         key: env.GOOGLE_API_KEY,
       },
     })
+
     return response.data
   },
 

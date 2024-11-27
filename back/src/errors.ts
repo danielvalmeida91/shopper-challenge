@@ -10,9 +10,9 @@ export const Errors: Record<string, ErrorPayload> = {
     code: 'CUSTOMER_ALREADY_EXISTS',
     statusCode: 409
   },
-  ADRESS_NOT_FOUND: {
+  ADDRESS_NOT_FOUND: {
     message: 'Address not found.',
-    code: 'ADRESS_NOT_FOUND',
+    code: 'ADDRESS_NOT_FOUND',
     statusCode: 404
   },
   DISTANCE_NOT_FOUND: {

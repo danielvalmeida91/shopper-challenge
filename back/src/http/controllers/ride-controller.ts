@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { CustomErrors } from '@/errors'
+import { CustomErrors, Errors } from '@/errors'
 import { confirmRide, estimateValue, getHistory } from '@/services/ride-service'
 
 export const estimateBodySchema = z.object({
@@ -21,6 +21,12 @@ export async function estimate(request: FastifyRequest, reply: FastifyReply) {
   } catch (error) {
     if (error instanceof CustomErrors) {
       return reply.status(error.getError().statusCode).send(error.getError())
+    }
+
+    if(error instanceof Error){
+      const errorString = String(error.message)
+      const newError = new CustomErrors(Errors[errorString])
+      return reply.status(newError.getError().statusCode).send(newError.getError())
     }
 
     throw error

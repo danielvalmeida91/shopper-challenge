@@ -7,7 +7,7 @@ import { findDriverById } from '@/repositories/driver-repository'
 import { RideRepository } from '@/repositories/ride-repository'
 
 export async function estimateValue({ customer_id, origin, destination }: z.infer<typeof estimateBodySchema>) {
-  if(origin === destination){
+  if(origin === destination || !customer_id || !origin || !destination){
     throw new CustomErrors(Errors.INVALID_DATA)
   }
 
@@ -47,7 +47,7 @@ export async function confirmRide({ customer_id, destination, distance, duration
     throw new CustomErrors(Errors.DRIVER_NOT_FOUND)
   }
 
-  if(driverExists?.minKm > Number(distance / 1000)){
+  if(driverExists?.min_km > Number(distance / 1000)){
     throw new CustomErrors(Errors.INVALID_DISTANCE)
   }
 
