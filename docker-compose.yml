@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   postgres:
-    container_name: shopper
+    container_name: shopper2
     image: postgres
     ports:
       - "5432:5432"
@@ -10,8 +8,11 @@ services:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: shopper-challenge
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docker -d shopper-challenge"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   back:
     container_name: back-service
@@ -21,9 +22,11 @@ services:
       - "8080:8080"
     environment:
       DATABASE_URL: postgres://docker:docker@postgres:5432/shopper-challenge
+    env_file:
+      - .env
     depends_on:
-      - postgres
-    command: yarn dev
+      postgres:
+        condition: service_healthy
 
   front:
     container_name: front-service
@@ -31,9 +34,9 @@ services:
       context: ./front
     ports:
       - "80:80"
+    env_file:
+      - .env
     depends_on:
+      - postgres
       - back
     command: yarn dev --host
-
-volumes:
-  postgres_data:

@@ -12,17 +12,14 @@ interface ICreateCustomer {
 export async function register({ name, email, password }: ICreateCustomer) {
   const password_hash = await hash(password, 6)
 
-  const customerWithSameEmail = await prisma.customer.findUnique({
-    where: {
-      email
-    }
-  })
+  const customerRepository = new CustomerRepository()
+
+  const customerWithSameEmail = await customerRepository.findByEmail(email)
 
   if (customerWithSameEmail) {
     throw new CustomErrors(Errors.CUSTOMER_ALREADY_EXISTS)
   }
 
-  const customerRepository = new CustomerRepository()
   await customerRepository.create({
     email,
     name,

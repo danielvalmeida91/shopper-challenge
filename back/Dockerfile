@@ -9,14 +9,18 @@ COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install
 
+# Install Prisma Client
+RUN yarn add @prisma/client
+
 # Copy the rest of the application files into the container
 COPY . .
 
-# Change directory to where your application source resides
-WORKDIR /app/src
+# Copy Prisma schema
+COPY prisma/schema.prisma prisma/
 
-# Expose the backend port
-EXPOSE 8080
+# Generate Prisma Client
+RUN npx prisma generate
+RUN npx prisma migrate dev
 
-# Command to run your backend
-CMD ["yarn", "start"]
+# Run migrations and seed
+CMD ["sh", "-c", "npx prisma migrate dev && yarn dev"]

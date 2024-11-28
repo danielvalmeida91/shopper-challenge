@@ -90,7 +90,7 @@ export const DriversCarousel = ({ drivers }: IDriversCarousel) => {
                     <p className="text-muted-foreground font-semibold text-sm">Comentário: <span className=" text-foreground caption leading-5 line-clamp-3 overflow-hidden text-ellipsis text-xs">{driver.review?.comment ?? ''}</span></p>
 
                     <Button variant={'default'} onClick={() => handleSelectDriver(driver)} className="text-sm min-w-[100px] hover:bg-slate-950 hover:text-muted transition-all duration-500" disabled={isLoading}>
-                      Escolher {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format((driver.value / 1000) ?? 0)}
+                      Escolher {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format((driver.value / 1000))}
                     </Button>
                   </CardContent>
                 </Card>

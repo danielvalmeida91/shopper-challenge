@@ -13,7 +13,7 @@ config({
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
   PORT: z.coerce.number().default(8080),
-  DATABASE_URL: z.string().default('postgresql://docker:docker@localhost:5432/mydb?schema=shopper-challenge'),
+  DATABASE_URL: z.string().default('postgres://docker:docker@postgres:5432/shopper-challenge'),
   GOOGLE_API_KEY: z.string(),
 })
 
