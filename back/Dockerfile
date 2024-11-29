@@ -18,9 +18,8 @@ COPY . .
 # Copy Prisma schema
 COPY prisma/schema.prisma prisma/
 
-# Generate Prisma Client
+# # Generate Prisma Client
 RUN npx prisma generate
-RUN npx prisma migrate dev
 
 # Run migrations and seed
 CMD ["sh", "-c", "npx prisma migrate dev && yarn dev"]

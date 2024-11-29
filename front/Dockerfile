@@ -19,4 +19,4 @@ WORKDIR /app/src
 EXPOSE 80
 
 # Command to run your backend
-CMD ["yarn", "start", "--host"]
+CMD ["yarn", "dev", "--host"]

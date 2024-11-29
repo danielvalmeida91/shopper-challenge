@@ -39,4 +39,3 @@ services:
     depends_on:
       - postgres
       - back
-    command: yarn dev --host
