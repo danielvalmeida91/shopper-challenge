@@ -22,4 +22,4 @@ COPY prisma/schema.prisma prisma/
 RUN npx prisma generate
 
 # Run migrations and seed
-CMD ["sh", "-c", "npx prisma migrate dev && yarn dev"]
+CMD ["sh", "-c", "npx prisma migrate dev && npx prisma db seed && yarn dev"]
